@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+
+
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-r from-violet-500 to-fuchsia-500">
+    <main class="w-80 font-serif flex-col mx-auto mt-28">
+        <h1 class="text-center text-2xl font-semibold mb-5">Simple Calculator</h1>
+        <!-- output section -->
+        <section class="output flex-col justify-end items-end py-8 bg-slate-800 shadow-lg">
+
+            <div class="previous-operand break-words text-base mr-1 text-gray-200  text-right">
+            </div>
+            <div class="current-operand break-words text-xl mr-1 text-white text-right">
+            </div>
+
+
+        </section>
+        <!-- output section -->
+
+        <section class="buttons grid grid-cols-4 grid-rows-5 shadow-lg cursor-pointer text-xl font-extrabold">
+            <button data-all-clear class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">AC</button>
+            <button data-delete class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">DEL</button>
+            <button data-square class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">√</button>
+            <button data-operation class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">/</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">1</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">2</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">3</button>
+            <button data-operation class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">*</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">4</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">5</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">6</button>
+            <button data-operation class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">+</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">7</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">8</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">9</button>
+            <button data-operation class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">-</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">.</button>
+            <button data-number class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3">0</button>
+            <button data-equals class="font-bold border-2 border-white bg-slate-300 hover:bg-violet-400 px-2 py-3 col-span-2"> = </button>
+
+        </section>
+    </main>
+    <!-- scripts -->
+    <script src="script.js "></script>
+</body>
+
+</html>
