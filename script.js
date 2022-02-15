@@ -107,5 +107,6 @@ squareRoot.addEventListener('click', function(e) {
     if (!secondNum && firstNum) {
         result = Math.sqrt(firstNum);
         currentOperand.innerText = result;
+        firstNum = result;
     }
 })
