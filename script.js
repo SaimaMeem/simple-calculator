@@ -3,67 +3,109 @@ const operations = document.querySelectorAll('[data-operation]');
 const allClear = document.querySelector('[data-all-clear]');
 const equals = document.querySelector('[data-equals]');
 const deletee = document.querySelector('[data-delete]');
-const square = document.querySelector('[data-square]');
-const currentOperandTextElement = document.querySelector('[data-current-operand]').innerText;
+const squareRoot = document.querySelector('[data-square-root]');
+const previousOperand = document.querySelector('[data-previous-operand]');
+const currentOperand = document.querySelector('[data-current-operand]');
 
-function getHistory() {
-    return document.querySelector('[data-previous-operand]').innerText;
+let firstNum = ''; //current
+let secondNum = ''; // previous
+let result = null;
+let lastOperation = '';
+let haveDecimalPoint = false;
+
+
+for (let num of numbers) {
+    num.addEventListener('click', function(e) {
+        if (e.target.innerText === '.' && !haveDecimalPoint) {
+            haveDecimalPoint = true;
+        } else if (e.target.innerText === '.' && haveDecimalPoint) {
+            return;
+        }
+        firstNum += e.target.innerText;
+        currentOperand.innerText = firstNum;
+    })
+}
+for (let op of operations) {
+    op.addEventListener('click', function(e) {
+        if (!firstNum) {
+            return;
+        }
+        haveDecimalPoint = false;
+        const operation = e.target.innerText;
+
+        if (firstNum && secondNum) {
+            mathOperation();
+        } else {
+            result = parseFloat(firstNum);
+        }
+        clear(operation);
+        lastOperation = operation;
+
+
+    })
 }
 
-function printHistory(num) {
-    document.querySelector('[data-previous-operand]').innerText = getFormattedNumber(num);
+function clear(name = '') {
+    secondNum = result + ' ' + name + ' ';
+    previousOperand.innerText = secondNum;
+    firstNum = '';
+    currentOperand.innerText = firstNum;
 }
 
-function getOutput() {
-    return document.querySelector('[data-current-operand]').innerText;
-}
+function mathOperation() {
+    switch (lastOperation) {
+        case '+':
+            result = parseFloat(result) + parseFloat(firstNum);
 
-function printOutput(num) {
-    if (num == '') {
-        document.querySelector('[data-current-operand]').innerText = '';
-    } else {
-        document.querySelector('[data-current-operand]').innerText = getFormattedNumber(num);
+            break;
+        case '-':
+            result = parseFloat(result) - parseFloat(firstNum);
+
+            break;
+        case '*':
+            result = parseFloat(result) * parseFloat(firstNum);
+
+            break;
+        case '/':
+            result = parseFloat(result) / parseFloat(firstNum);
+
+            break;
+
     }
 }
 
-function getFormattedNumber(num) {
-    let n = Number(num);
-    let value = n.toLocaleString("en");
-    return value;
-}
+equals.addEventListener('click', function(e) {
+    if (!firstNum || !secondNum) {
+        return;
+    }
+    haveDecimalPoint = false;
+    mathOperation();
+    clear();
+    currentOperand.innerText = result;
+    previousOperand.innerText = '';
+    firstNum = result;
+    secondNum = '';
 
-
-function reverseNumberFormat(num) {
-    return Number(num.replace(/,/g, ''));
-}
-// alert(reverseNumberForFormat(getOutput()));
-
-
-for (num of numbers) {
-    num.addEventListener('click', function() {
-        let output = reverseNumberFormat(getOutput());
-        if (output != NaN) {
-            output = output + this.innerText;
-            printOutput(output);
-            // console.log(output);
-        }
-    });
-}
-
-// for (op of operations) {
-//     op.addEventListener('click', function() {
-//         if ()
-//     });
-// }
-
-allClear.addEventListener('click', function() {
-    printHistory('');
-    printOutput('');
 })
-deletee.addEventListener('click', function() {
-    var output = reverseNumberFormat(getOutput()).toString();
-    if (output) {
-        output = output.substring(0, output.length - 1);
-        printOutput(output);
+
+
+allClear.addEventListener('click', function(e) {
+    previousOperand.innerText = '';
+    currentOperand.innerText = '';
+    firstNum = '';
+    secondNum = '';
+    result = '';
+});
+
+deletee.addEventListener('click', function(e) {
+    firstNum = firstNum.toString();
+    firstNum = firstNum.substring(0, firstNum.length - 1);
+    currentOperand.innerText = firstNum;
+});
+
+squareRoot.addEventListener('click', function(e) {
+    if (!secondNum && firstNum) {
+        result = Math.sqrt(firstNum);
+        currentOperand.innerText = result;
     }
 })
